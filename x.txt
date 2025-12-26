@@ -1,0 +1,29 @@
+#!/bin/bash
+
+echo "=========================================="
+echo "     RDP Setup (Ubuntu 22.04)             "
+echo "=========================================="
+sleep 1
+
+echo "[1/6] Updating system..."
+sudo apt update && sudo apt upgrade -y
+
+echo "[2/6] Installing XFCE Desktop and XRDP..."
+sudo apt install xfce4 xfce4-goodies xrdp dbus-x11 -y
+
+echo "[3/6] Configuring .xsession for XRDP..."
+echo "startxfce4" > ~/.xsession
+
+echo "[4/6] Fixing .xsession permissions..."
+sudo chown $(whoami):$(whoami) ~/.xsession
+
+echo "[5/6] Enabling and restarting XRDP service..."
+sudo systemctl enable xrdp
+sudo systemctl restart xrdp
+
+echo "[6/6] Installation Complete!"
+echo "=========================================="
+echo " ✅ XRDP is ready"
+echo " ✅ XFCE desktop configured"
+echo "=========================================="
+echo "Now you can connect using Windows RDP."
