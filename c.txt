@@ -1,8 +1,5 @@
 #!/bin/bash
 
-## 📦 Instalação completa
-
-```bash
 # 1. Baixar e instalar o Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install -y ./google-chrome-stable_current_amd64.deb
@@ -11,7 +8,7 @@ rm google-chrome-stable_current_amd64.deb
 # 2. Criar wrapper google-chrome-safe
 sudo tee /usr/local/bin/google-chrome-safe > /dev/null << 'EOF'
 #!/bin/bash
-/usr/bin/google-chrome --no-sandbox --disable-dev-shm-usage --disable-gpu "$@"
+/usr/bin/google-chrome-stable --no-sandbox --disable-dev-shm-usage --disable-gpu "$@"
 EOF
 sudo chmod +x /usr/local/bin/google-chrome-safe
 
@@ -22,8 +19,8 @@ sudo sed -i 's|Exec=/usr/bin/google-chrome-stable %U|Exec=/usr/local/bin/google-
 google-chrome-safe
 
 # 5. (Opcional) Criar atalho no Desktop
-sudo mkdir -p /root/Desktop
-sudo tee /root/Desktop/chrome.desktop > /dev/null << 'EOF'
+mkdir -p ~/Desktop
+tee ~/Desktop/chrome.desktop > /dev/null << 'EOF'
 [Desktop Entry]
 Version=1.0
 Type=Application
@@ -33,4 +30,4 @@ Icon=google-chrome
 Terminal=false
 Categories=Network;WebBrowser;
 EOF
-sudo chmod +x /root/Desktop/chrome.desktop
+chmod +x ~/Desktop/chrome.desktop
